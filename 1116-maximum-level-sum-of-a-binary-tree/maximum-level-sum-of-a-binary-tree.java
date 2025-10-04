@@ -47,16 +47,16 @@ class Solution {
         return result;
     }
 }
-/*DFS(1,1)           // Call 1: root
-│
-├─ DFS(7,2)        // Call 2: left child of 1
-│  │
-│  ├─ DFS(7,3)     // Call 3: left child of 7 (leaf)
-│  │     └─ return to 7
-│  │
-│  └─ DFS(-8,3)    // Call 4: right child of 7 (leaf)
-│        └─ return to 7
-│
-└─ DFS(0,2)        // Call 5: right child of 1 (leaf)
-      └─ return to 1
+/*| Step | Function Call      | Action                               | Map `mp`         |
+| ---- | ------------------ | ------------------------------------ | ---------------- |
+| 1    | DFS(1,1)           | Add 1 to level 1                     | {1:1}            |
+| 2    | DFS(7,2)           | Add 7 to level 2                     | {1:1, 2:7}       |
+| 3    | DFS(7,3)           | Add 7 to level 3 (leaf)              | {1:1, 2:7, 3:7}  |
+| 4    | return to DFS(7,2) | Finished left child                  | {1:1, 2:7, 3:7}  |
+| 5    | DFS(-8,3)          | Add -8 to level 3 (leaf)             | {1:1, 2:7, 3:-1} |
+| 6    | return to DFS(7,2) | Finished right child                 | {1:1, 2:7, 3:-1} |
+| 7    | return to DFS(1,1) | Finished left subtree                | {1:1, 2:7, 3:-1} |
+| 8    | DFS(0,2)           | Add 0 to level 2 (leaf)              | {1:1, 2:7, 3:-1} |
+| 9    | return to DFS(1,1) | Finished right subtree               | {1:1, 2:7, 3:-1} |
+| 10   | End                | DFS complete → compute max level sum | Result: 2        |
  */
