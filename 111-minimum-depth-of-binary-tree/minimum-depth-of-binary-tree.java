@@ -15,18 +15,16 @@
  */
 class Solution {
     public int minDepth(TreeNode root) {
-        if (root == null)
-            return 0;
+        if (root == null) return 0;
 
-        // If leaf node
-        if (root.left == null && root.right == null)
-            return 1;
+        int lh = minDepth(root.left);
+        int rh = minDepth(root.right);
 
-        // If left or right child is null, treat it as max value
-        int left = (root.left != null) ? minDepth(root.left) : Integer.MAX_VALUE;
-        int right = (root.right != null) ? minDepth(root.right) : Integer.MAX_VALUE;
+        // handle cases where one subtree is null
+        if (root.left == null) return 1 + rh;
+        if (root.right == null) return 1 + lh;
 
-        return 1 + Math.min(left, right);
+        return 1 + Math.min(lh, rh);
     }
 }
 /*minDepth(3)
